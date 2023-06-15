@@ -16,4 +16,8 @@ export class CategoriesService {
     })
       .catch(err => {console.log(err)})
   }
+
+  loadData(){
+
+  }
 }
