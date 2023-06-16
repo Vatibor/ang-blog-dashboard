@@ -47,6 +47,10 @@ export class CategoriesComponent implements OnInit{
     this.categoryId = id
   }
 
+  onDelete(id: string | undefined){
+    this.categoryService.deleteData(id)
+  }
+
 
 
 }
