@@ -6,7 +6,7 @@
     </div>
   </div>
 
-  <form [formGroup]="postForm">
+  <form [formGroup]="postForm" (ngSubmit)="onSubmit()">
 
     <div class="row">
       <div class="col-md-7">
@@ -120,6 +120,5 @@
         <button class="btn btn-warning btn-theme ms-3 text-white" routerLink="/posts">Back to Post</button>
       </div>
     </div>
-
   </form>
 </div>
