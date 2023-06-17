@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {CategoriesService} from "../../services/categories.service";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-new-post',
@@ -13,13 +14,31 @@ export class NewPostComponent implements OnInit {
   selectedImg: any
   categories: Array<any> | undefined
 
-  constructor(private categoryService: CategoriesService) { }
+  postForm: FormGroup
+  constructor(private categoryService: CategoriesService, private fb: FormBuilder) {
+
+    this.postForm = this.fb.group({
+      title: ['', [Validators.required, Validators.minLength(10)]],
+      permalink: ['', Validators.required],
+      excerpt: ['', [Validators.required, Validators.minLength(50)]],
+      category: ['', Validators.required],
+      postImg: ['', Validators.required],
+      content: ['', Validators.required]
+    })
+
+  }
 
   ngOnInit() {
     this.categoryService.loadData().subscribe(val => {
       this.categories = val
     })
+    this.postForm.controls['permalink'].disable();
   }
+
+  get fc(){
+    return this.postForm.controls
+  }
+
 
   onTitleChanged($event: KeyboardEvent) {
     // console.log(($event.target as HTMLInputElement).value)
