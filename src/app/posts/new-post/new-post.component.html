@@ -15,11 +15,12 @@
 
             <div class="form-group">
               <label> Title </label>
-              <input type="text" class="form-control">
+              <input type="text" class="form-control" (keyup)="onTitleChanged($event)">
             </div>
             <div class="form-group">
               <label> Permalink </label>
-              <input type="text" class="form-control">
+              <!-- We got the - signed title name with two way binding    -->
+              <input type="text" class="form-control" [(ngModel)]="permalink" name="permalink" disabled>
             </div>
             <div class="form-group">
               <label> Excerpt </label>
@@ -36,12 +37,14 @@
           <label>Please select a post categroy</label>
           <select class="form-control">
             <option value="" disabled>Please select a category</option>
+            <option *ngFor="let category of categories" value="">{{ category.data.category }}</option>
           </select>
         </div>
 
         <div class="form-group">
-          <label for="">Post Image</label>
-          <input type="file" class="form-control">
+          <label>Post Image</label>
+          <img [src]="imgSrc" class="form-control img-fluid img-preview">
+          <input type="file" class="form-control" accept="image/*" (change)="showPreview($event)">
         </div>
 
       </div>
@@ -54,17 +57,17 @@
           <div class="card-body">
             <div class="form-group">
               <label>Content</label>
-              <textarea cols="30" rows="10" class="form-control"></textarea>
+              <angular-editor placeholder="Add your content here"></angular-editor>
             </div>
           </div>
         </div>
       </div>
 
-      <div class="col-md-12 text-center mb-5">
-        <button class="btn btn-info btn-theme">Save Post</button>
-        <button class="btn btn-warning btn-theme ms-3" routerLink="/posts">Back to Post</button>
+      <div class="col-md-12 text-center mb-5 mt-3">
+        <button class="btn btn-info btn-theme text-white">Save Post</button>
+        <button class="btn btn-warning btn-theme ms-3 text-white" routerLink="/posts">Back to Post</button>
       </div>
     </div>
-<!--    TODO 05:08:29-->
+
   </form>
 </div>

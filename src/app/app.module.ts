@@ -4,6 +4,9 @@ import { FormsModule} from "@angular/forms";
 import { ToastrModule } from "ngx-toastr";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 
+import { HttpClientModule } from "@angular/common/http";
+import { AngularEditorModule } from "@kolkov/angular-editor";
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './layouts/header/header.component';
@@ -37,7 +40,9 @@ import { NewPostComponent } from './posts/new-post/new-post.component';
     AngularFirestoreModule,
     FormsModule,
     ToastrModule.forRoot(),
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    HttpClientModule,
+    AngularEditorModule
   ],
   providers: [],
   bootstrap: [AppComponent]
