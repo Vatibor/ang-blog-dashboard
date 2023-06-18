@@ -17,6 +17,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ReactiveFormsModule } from "@angular/forms";
 
 import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFireStorageModule } from "@angular/fire/compat/storage";
 import { environment } from 'src/environments/environment.development';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { CategoriesComponent } from './categories/categories.component';
@@ -45,7 +46,8 @@ import { NewPostComponent } from './posts/new-post/new-post.component';
     BrowserAnimationsModule,
     HttpClientModule,
     AngularEditorModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    AngularFireStorageModule
   ],
   providers: [],
   bootstrap: [AppComponent]

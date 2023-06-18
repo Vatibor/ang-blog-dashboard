@@ -64,13 +64,13 @@
       <div class="col-md-5">
 
         <div class="form-group mb-3 mt-3">
-          <label>Please select a categroy</label>
+          <label>Please select a category</label>
           <select
             class="form-control"
             formControlName="category"
             [ngClass]="{ 'is-invalid': fc.category.touched && fc.category.invalid }">
             <option value="">Please select a category</option>
-            <option *ngFor="let category of categories" ngValue="category">{{ category.data.category }}</option>
+            <option *ngFor="let category of categories" ngValue="{{ category.id }}-{{ category.data.category }}">{{ category.data.category }}</option>
           </select>
 
           <div *ngIf="fc.category.errors?.required">

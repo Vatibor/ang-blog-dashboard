@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {CategoriesService} from "../../services/categories.service";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Post} from "../../models/post";
+import {PostsService} from "../../services/posts.service";
 
 @Component({
   selector: 'app-new-post',
@@ -16,7 +17,7 @@ export class NewPostComponent implements OnInit {
   categories: Array<any> | undefined
 
   postForm: FormGroup
-  constructor(private categoryService: CategoriesService, private fb: FormBuilder) {
+  constructor(private categoryService: CategoriesService, private fb: FormBuilder, private postService: PostsService) {
 
     this.postForm = this.fb.group({
       title: ['', [Validators.required, Validators.minLength(10)]],
@@ -48,17 +49,6 @@ export class NewPostComponent implements OnInit {
     this.permalink = title.replace(/\s/g, "-")
   }
 
-  // showPreview($event: Event) {
-  //
-  //   const reader = new FileReader()
-  //   reader.onload = (e) => {
-  //
-  //     this.imgSrc = e.target.result
-  //   }
-  //
-  //   reader.readAsDataURL($event.target.files[0])
-  // }
-
   showPreview(event: Event) {
     const inputElement = event.target as HTMLInputElement;
 
@@ -78,13 +68,17 @@ export class NewPostComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.postForm.value)
+    // console.log(this.postForm.value)
+
+    let splitted = this.postForm.value.category.split('-')
+
     const postData: Post = {
       title: this.postForm.value.title,
-      permalink: this.postForm.value.permalink,
+      // permalink: this.postForm.value.permalink,
+      permalink: this.permalink,
       category: {
-        categoryId: '',
-        category: ''
+        categoryId: splitted[0],
+        category: splitted[1]
       },
       postImgPath: '',
       excerpt: this.postForm.value.excerpt,
@@ -94,5 +88,10 @@ export class NewPostComponent implements OnInit {
       status: 'new',
       createdAt: new Date()
     }
+    // console.log(postData)
+    this.postService.uploadImage(this.selectedImg, postData)
+    this.postForm.reset()
+    this.imgSrc = './assets/placeholder-image.png'
   }
+
 }
