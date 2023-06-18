@@ -16,7 +16,7 @@ export class PostsService {
     private toastr: ToastrService,
     private router: Router) { }
 
-  uploadImage(selectedImage: any, postData: any){
+  uploadImage(selectedImage: any, postData: any, formStatus: string, id: string | undefined){
     const filePath = `postIMG/${Date.now()}`
     // console.log(postData)
 
@@ -26,7 +26,11 @@ export class PostsService {
       this.storage.ref(filePath).getDownloadURL().subscribe(URL => {
         postData.postImgPath = URL
 
-        this.saveData(postData)
+        if(formStatus == 'Edit'){
+          this.updateData(id, postData)
+        }else{
+          this.saveData(postData)
+        }
       })
     })
   }
@@ -50,6 +54,17 @@ export class PostsService {
         })
       })
     )
+  }
+
+  loadOneData(id: string){
+    return this.afs.doc(`posts/${id}`).valueChanges()
+  }
+
+  updateData(id: string | undefined, postData: any){
+    this.afs.doc(`posts/${id}`).update(postData).then(() => {
+      this.toastr.success('Data Updated Successfully')
+    })
+    this.router.navigate(['/posts'])
   }
 
 }

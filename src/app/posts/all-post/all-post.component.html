@@ -38,7 +38,9 @@
               <td>{{ post.data.excerpt }}</td>
               <td>{{ post.data.category.category}}</td>
               <td>{{ post.data.createdAt.toMillis() | date }}</td>
-              <td></td>
+              <td>
+                <button class="btn btn-sm btn-warning text-white" routerLink="/posts/new" [queryParams]="{id: post.id}">Edit</button>
+              </td>
             </tr>
             </tbody>
           </table>
