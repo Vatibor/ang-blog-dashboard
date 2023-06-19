@@ -67,4 +67,22 @@ export class PostsService {
     this.router.navigate(['/posts'])
   }
 
+  deleteImage(postImgPath: any, id: string){
+    console.log(postImgPath)
+    this.storage.storage.refFromURL(postImgPath).delete().then(() => {
+      this.deleteData(id)
+    })
+  }
+
+  deleteData(id: string){
+    this.afs.doc(`posts/${id}`).delete().then(() => {
+      this.toastr.warning('Data Deleted!')
+    })
+  }
+
+  markFeatured(id: string, featuredData: any){
+    this.afs.doc(`posts/${id}`).update(featuredData).then(() => {
+      this.toastr.info('Featured Status Updated!')
+    })
+  }
 }

@@ -23,6 +23,8 @@ import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { CategoriesComponent } from './categories/categories.component';
 import { AllPostComponent } from './posts/all-post/all-post.component';
 import { NewPostComponent } from './posts/new-post/new-post.component';
+import { LoginComponent } from './auth/login/login.component';
+import {AngularFireAuthModule} from "@angular/fire/compat/auth";
 
 
 @NgModule({
@@ -33,7 +35,8 @@ import { NewPostComponent } from './posts/new-post/new-post.component';
     DashboardComponent,
     CategoriesComponent,
     AllPostComponent,
-    NewPostComponent
+    NewPostComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -47,7 +50,8 @@ import { NewPostComponent } from './posts/new-post/new-post.component';
     HttpClientModule,
     AngularEditorModule,
     ReactiveFormsModule,
-    AngularFireStorageModule
+    AngularFireStorageModule,
+    AngularFireAuthModule
   ],
   providers: [],
   bootstrap: [AppComponent]
